@@ -1,31 +1,31 @@
-clear  % Çå³ı±äÁ¿
-clc    % ÇåÆÁ
+clear  % æ¸…é™¤å˜é‡
+clc    % æ¸…å±
 
-%% 1¡¢¶ÁÈ¡Êı¾İ
-info1 = ncinfo('pr_Amon_bcc-csm1-1_rcp45_r1i1p1_200601-209912.nc'); % ²é¿´±äÁ¿
-info2 = ncinfo('pr_Amon_bcc-csm1-1_rcp45_r1i1p1_210001-230012.nc'); % ²é¿´±äÁ¿
-lon = ncread('pr_Amon_bcc-csm1-1_rcp45_r1i1p1_200601-209912.nc','lon'); % ¶ÁÈ¡¾­¶È
-lat = ncread('pr_Amon_bcc-csm1-1_rcp45_r1i1p1_200601-209912.nc','lat');  % ¶ÁÈ¡Î³¶È
-time1 = ncread('pr_Amon_bcc-csm1-1_rcp45_r1i1p1_200601-209912.nc','time');  % ¶ÁÈ¡Ê±¼ä
-time2 = ncread('pr_Amon_bcc-csm1-1_rcp45_r1i1p1_210001-230012.nc','time');  % ¶ÁÈ¡Ê±¼ä
-pr1 = ncread('pr_Amon_bcc-csm1-1_rcp45_r1i1p1_200601-209912.nc','pr',[1,1,890],[inf,inf,inf])*30*24*60*60;  % ¶ÁÈ¡208001-209912ÔÂµÄÊı¾İ
-pr2 = ncread('pr_Amon_bcc-csm1-1_rcp45_r1i1p1_210001-230012.nc','pr',[1,1,1],[inf,inf,12])*30*24*60*60;  % ¶ÁÈ¡210001-210012ÔÂµÄÊı¾İ
+%% 1ã€è¯»å–æ•°æ®
+info1 = ncinfo('pr_Amon_bcc-csm1-1_rcp45_r1i1p1_200601-209912.nc'); % æŸ¥çœ‹å˜é‡
+info2 = ncinfo('pr_Amon_bcc-csm1-1_rcp45_r1i1p1_210001-230012.nc'); % æŸ¥çœ‹å˜é‡
+lon = ncread('pr_Amon_bcc-csm1-1_rcp45_r1i1p1_200601-209912.nc','lon'); % è¯»å–ç»åº¦
+lat = ncread('pr_Amon_bcc-csm1-1_rcp45_r1i1p1_200601-209912.nc','lat');  % è¯»å–çº¬åº¦
+time1 = ncread('pr_Amon_bcc-csm1-1_rcp45_r1i1p1_200601-209912.nc','time');  % è¯»å–æ—¶é—´
+time2 = ncread('pr_Amon_bcc-csm1-1_rcp45_r1i1p1_210001-230012.nc','time');  % è¯»å–æ—¶é—´
+pr1 = ncread('pr_Amon_bcc-csm1-1_rcp45_r1i1p1_200601-209912.nc','pr',[1,1,890],[inf,inf,inf])*30*24*60*60;  % è¯»å–208001-209912æœˆçš„æ•°æ®
+pr2 = ncread('pr_Amon_bcc-csm1-1_rcp45_r1i1p1_210001-230012.nc','pr',[1,1,1],[inf,inf,12])*30*24*60*60;  % è¯»å–210001-210012æœˆçš„æ•°æ®
 
-%% 2¡¢×ª»»Ê±¼ä¸ñÊ½
-t0 = datetime(2006,1,1);                % ÉèÖÃ³õÊ¼Ê±¼ä
-% date_yyymmdd = t0 + double(time(:))/24;    % timeÎª¾à2006Äê1ÔÂ1ÈÕ00Ê±µÄĞ¡Ê±ÊıÒ»Î¬Êı×é
-t1 = t0 + time1(:);            % timeÎª¾à2006Äê1ÔÂ1ÈÕ00Ê±µÄÈÕÊıÒ»Î¬Êı×é
-t1.Format = 'yyyyMMdd';           % ×ª»»³ÉÈÎÒâÏëÒªµÄÊ±¼ä¸ñÊ½£¬'yyyyMMMdd','yyyyMMMMdd','MMÔÂddÈÕ'
-t_str1 = datestr(t1,'yyyymm');   % datetimeÊı¾İÀàĞÍ×ªÎªcharÀàĞÍ
-t_num1 = str2num(t_str1);          % charÀàĞÍ×ªÎªÊı×édouble
+%% 2ã€è½¬æ¢æ—¶é—´æ ¼å¼
+t0 = datetime(2006,1,1);                % è®¾ç½®åˆå§‹æ—¶é—´
+% date_yyymmdd = t0 + double(time(:))/24;    % timeä¸ºè·2006å¹´1æœˆ1æ—¥00æ—¶çš„å°æ—¶æ•°ä¸€ç»´æ•°ç»„
+t1 = t0 + time1(:);            % timeä¸ºè·2006å¹´1æœˆ1æ—¥00æ—¶çš„æ—¥æ•°ä¸€ç»´æ•°ç»„
+t1.Format = 'yyyyMMdd';           % è½¬æ¢æˆä»»æ„æƒ³è¦çš„æ—¶é—´æ ¼å¼ï¼Œ'yyyyMMMdd','yyyyMMMMdd','MMæœˆddæ—¥'
+t_str1 = datestr(t1,'yyyymm');   % datetimeæ•°æ®ç±»å‹è½¬ä¸ºcharç±»å‹
+t_num1 = str2num(t_str1);          % charç±»å‹è½¬ä¸ºæ•°ç»„double
 
-t0 = datetime(2100,1,1);                % ÉèÖÃ³õÊ¼Ê±¼ä
-t2 = t0 + time2(:);            % timeÎª¾à2100Äê1ÔÂ1ÈÕ00Ê±µÄÈÕÊıÒ»Î¬Êı×é
-t2.Format = 'yyyyMMdd';           % ×ª»»³ÉÈÎÒâÏëÒªµÄÊ±¼ä¸ñÊ½£¬'yyyyMMMdd','yyyyMMMMdd','MMÔÂddÈÕ'
-t_str2 = datestr(t2,'yyyymm');   % datetimeÊı¾İÀàĞÍ×ªÎªcharÀàĞÍ
-t_num2 = str2num(t_str2);          % charÀàĞÍ×ªÎªÊı×édouble
+t0 = datetime(2100,1,1);                % è®¾ç½®åˆå§‹æ—¶é—´
+t2 = t0 + time2(:);            % timeä¸ºè·2100å¹´1æœˆ1æ—¥00æ—¶çš„æ—¥æ•°ä¸€ç»´æ•°ç»„
+t2.Format = 'yyyyMMdd';           % è½¬æ¢æˆä»»æ„æƒ³è¦çš„æ—¶é—´æ ¼å¼ï¼Œ'yyyyMMMdd','yyyyMMMMdd','MMæœˆddæ—¥'
+t_str2 = datestr(t2,'yyyymm');   % datetimeæ•°æ®ç±»å‹è½¬ä¸ºcharç±»å‹
+t_num2 = str2num(t_str2);          % charç±»å‹è½¬ä¸ºæ•°ç»„double
 
-%% 3¡¢Ñ¡³öÖĞ¹ú¸÷Ê¡ÇøÓò¾­Î³¶È¸ñµã,Æ¥Åä¾­Î³¶ÈÊ±¼ä½µË®Á¿
+%% 3ã€é€‰å‡ºä¸­å›½å„çœåŒºåŸŸç»çº¬åº¦æ ¼ç‚¹,åŒ¹é…ç»çº¬åº¦æ—¶é—´é™æ°´é‡
 shp = shaperead('C:\Users\ZHAN\Desktop\20210123\gadm36_CHN_shp\gadm36_CHN_1.shp');
 
 [mlon,mlat] = meshgrid(lon,lat);
@@ -42,16 +42,16 @@ excel_data = []; excel_name = []; rr = 1;
 for i = 1 : length(shp)
     i
     name = shp(i).NAME_1
-    in = inpolygon(xq, yq, shp(i).X, shp(i).Y); % ÅĞ¶ÏÄÄĞ©¸ñµãÔÚÊ¡½çÄÚ
-    pd = sort(in,'descend');  % ½«Âß¼­0¡¢1°´½µĞòÅÅÁĞ£¬Ä¿µÄÎªÁËÅĞ¶ÏÊÇ·ñÓĞ¸ñµãÔÚÊ¡½çÄÚ£¬Èç¹ûÓĞ£¬ÔòµÚÒ»¸öÖµ±Ø¶¨ÊÇ1£¬·ñÔò0
-    if pd(1) %¼´Èç¹ûµÚÒ»¸öÖµÎªÕæ£¬Ôò¿ªÊ¼ºóĞø¼ÆËã
-        lon_lat = [xq(in),yq(in)]; %Ê¡½çÄÚµÄÍø¸ñµã¾­Î³¶È
-        % ÕÒ³ölon_latËùÔÚĞĞÊı
+    in = inpolygon(xq, yq, shp(i).X, shp(i).Y); % åˆ¤æ–­å“ªäº›æ ¼ç‚¹åœ¨çœç•Œå†…
+    pd = sort(in,'descend');  % å°†é€»è¾‘0ã€1æŒ‰é™åºæ’åˆ—ï¼Œç›®çš„ä¸ºäº†åˆ¤æ–­æ˜¯å¦æœ‰æ ¼ç‚¹åœ¨çœç•Œå†…ï¼Œå¦‚æœæœ‰ï¼Œåˆ™ç¬¬ä¸€ä¸ªå€¼å¿…å®šæ˜¯1ï¼Œå¦åˆ™0
+    if pd(1) %å³å¦‚æœç¬¬ä¸€ä¸ªå€¼ä¸ºçœŸï¼Œåˆ™å¼€å§‹åç»­è®¡ç®—
+        lon_lat = [xq(in),yq(in)]; %çœç•Œå†…çš„ç½‘æ ¼ç‚¹ç»çº¬åº¦
+        % æ‰¾å‡ºlon_latæ‰€åœ¨è¡Œæ•°
         r1 = 1; r2 = 1; mark_lon = []; mark_lat = [];
         for j = 1 : size(lon_lat,1)
             for k = 1 : length(lon)
                 if lon_lat(j,1) == lon(k,1)
-                    mark_lon(r1,1) = k; %ÕÒ³öÊ¡½çÄÚ¾­¶ÈËùÔÚĞĞÊı
+                    mark_lon(r1,1) = k; %æ‰¾å‡ºçœç•Œå†…ç»åº¦æ‰€åœ¨è¡Œæ•°
                     r1 = r1 + 1;
                 end
             end
@@ -59,77 +59,26 @@ for i = 1 : length(shp)
         for jj = 1 : size(lon_lat,1)
             for kk = 1 : length(lat)
                 if lon_lat(jj,2) == lat(kk,1)
-                    mark_lat(r2,1) = kk; %ÕÒ³öÊ¡½çÄÚÎ³¶ÈËùÔÚĞĞÊı
+                    mark_lat(r2,1) = kk; %æ‰¾å‡ºçœç•Œå†…çº¬åº¦æ‰€åœ¨è¡Œæ•°
                     r2 = r2 + 1;
                 end
             end
         end
       
-        % ÌáÈ¡½µË®Öµ
+        % æå–é™æ°´å€¼
         name_add = [];
         for ii = 1 : length(mark_lon)
-            data1(ii,:) = [pr1(mark_lon(ii,1),mark_lat(ii,1),1:239)]; %Ç°Ò»½×¶ÎÊ±¼äµÄ½µË®Êı¾İ
-            data2(ii,:) = [pr2(mark_lon(ii,1),mark_lat(ii,1),1:12)];  %ºóÒ»½×¶ÎÊ±¼äµÄ½µË®Êı¾İ
+            data1(ii,:) = [pr1(mark_lon(ii,1),mark_lat(ii,1),1:239)]; %å‰ä¸€é˜¶æ®µæ—¶é—´çš„é™æ°´æ•°æ®
+            data2(ii,:) = [pr2(mark_lon(ii,1),mark_lat(ii,1),1:12)];  %åä¸€é˜¶æ®µæ—¶é—´çš„é™æ°´æ•°æ®
             name_add{ii} = name;
         end
-        % ÕûºÏ½µË®Êı¾İºÍÊ¡·İ
+        % æ•´åˆé™æ°´æ•°æ®å’Œçœä»½
         temp = [data1,data2]';  temp_name = name_add;
         excel_data = [excel_data,mean(temp,2)];
 %         excel_name = [excel_name,temp_name];
-        excel_name{rr} = shp(i).NAME_1; % Ê¡·İÃû
+        excel_name{rr} = shp(i).NAME_1; % çœä»½å
         rr = rr + 1;
         clear lon_lat data1 data2
     end
 end
-excel_data_time = [[t_num1(890:end);t_num2(1:12)],excel_data]; %Ìí¼ÓÁËÊ±¼äµÄ2080-2100Êı¾İ
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-% %% 4¡¢Æ¥Åä¾­Î³¶ÈÊ±¼ä½µË®Á¿
-% [mlon,mlat] = meshgrid(lon,lat);
-% mlon = mlon';
-% mlat = mlat';
-% r = 1;
-% data = zeros(size(mlon,1)*size(mlon,2)*(length(time)-889),3); %
-% for i = 1 : size(mlon,1)
-%     for j = 1 : size(mlat,2)
-%         for k = 890 : length(time)
-%             data(r,1) = mlon(i,j);
-%             data(r,2) = mlat(i,j);
-%             data(r,3) = t_num(k);
-%             data(r,4) = pr(i,j,k);
-%             r = r + 1;
-%         end
-%     end
-% end
-%
-% load coast.mat
-% % r = 1;
-% % for i = 1 :1: 64
-% %     for j = 1 : 128
-% %         aaa(r,1) = mlon(i,j);
-% %         aaa(r,2) = mlat(i,j);
-% %         r = r + 1;
-% %     end
-% % end
-% %
-% plot(long,lat)
-% hold on
-% scatter(shp(i).X,shp(i).Y,'.')
-% scatter(xq(in),yq(in),'*')
+excel_data_time = [[t_num1(890:end);t_num2(1:12)],excel_data]; %æ·»åŠ äº†æ—¶é—´çš„2080-2100æ•°æ®
